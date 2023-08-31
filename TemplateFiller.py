@@ -1,4 +1,5 @@
 import csv
+import os
 from docx import Document
 
 
@@ -15,6 +16,13 @@ with open('Cocktails.csv', newline='') as csvfile:
         for columnName in headers:
             for paragraph in doc.paragraphs:
                 paragraph.text = paragraph.text.replace('<' + columnName + '>', row[columnName])
+        #pcheck if a directory exists
+        path = "result"
+        # Check whether the specified path exists or not
+        isExist = os.path.exists(path)
+        if not isExist:
+            os.makedirs(path)
+            print("The new directory is created!")
         doc.save('result/' + row[headers[0]] + '.docx')        
 
 
