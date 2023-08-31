@@ -4,7 +4,7 @@ import tkinter as prog
 from docx import Document
 
 root= prog.Tk()
-
+root.title("TemplateFiller")
 canvas1 = prog.Canvas(root, width = 300, height = 300)
 canvas1.pack()
 
