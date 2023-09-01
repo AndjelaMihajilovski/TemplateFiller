@@ -14,7 +14,8 @@ csvPath = ""
 def BrowseFile (): 
     global filename 
     currdir = os.getcwd()
-    tempdir = fd.askopenfilename(parent=root, initialdir=currdir, title='Please select a directory')
+    filetypes = (("Word files", "*.docx"), ("All files", "*.*"))
+    tempdir = fd.askopenfilename(parent=root, initialdir=currdir, title='Please select a Word Template File', filetypes=filetypes)
     
     if len(tempdir) > 0:
         print("You chose %s" % tempdir)
@@ -22,6 +23,17 @@ def BrowseFile ():
         print ("\template file name = ", filename)
 
 def BrowseCSV (): 
+    global csvPath 
+    currdir = os.getcwd()
+    filetypes = (("CSV files", "*.csv"), ("All files", "*.*"))
+    tempdir = fd.askopenfilename(parent=root, initialdir=currdir, title='Please select a CSV file', filetypes=filetypes)
+    
+    if len(tempdir) > 0:
+        print("You chose %s" % tempdir)
+        csvPath = tempdir
+        print ("\template file name = ", csvPath)
+
+def BrowseDestinationPath (): 
     global csvPath 
     currdir = os.getcwd()
     tempdir = fd.askopenfilename(parent=root, initialdir=currdir, title='Please select a directory')
