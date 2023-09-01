@@ -10,6 +10,7 @@ canvas1 = prog.Canvas(root, width = 300, height = 300)
 canvas1.pack()
 filename = ""
 csvPath = ""
+path = ""
 
 def BrowseFile (): 
     global filename 
@@ -34,46 +35,48 @@ def BrowseCSV ():
         print ("\template file name = ", csvPath)
 
 def BrowseDestinationPath (): 
-    global csvPath 
+    global path 
     currdir = os.getcwd()
-    tempdir = fd.askopenfilename(parent=root, initialdir=currdir, title='Please select a directory')
+    tempdir = fd.askdirectory(parent=root, initialdir=currdir, title='Please select a directory')
     
     if len(tempdir) > 0:
         print("You chose %s" % tempdir)
-        csvPath = tempdir
-        print ("\template file name = ", csvPath)
+        path = tempdir
+        print ("\template file name = ", path)
 
-def CreateTemplate (): 
+def CreateTemplate ():
+    global filena 
     global csvPath 
-
+    global path 
     with open(csvPath, newline='') as csvfile:
         csv_reader = csv.DictReader(csvfile)
         headers = csv_reader.fieldnames
+        result_dir = os.path.join(path, "result")
+        if not os.path.exists(result_dir):
+            os.makedirs(result_dir)
+            print("The 'result' directory is created!")
+
         for row in csv_reader:
             doc = Document(filename)
-            print('Parsing: ' + row['Ime'])
+            print('Parsing: ' + row['Name'])
 
             for columnName in headers:
                 for paragraph in doc.paragraphs:
                     paragraph.text = paragraph.text.replace('<' + columnName + '>', row[columnName])
-            #pcheck if a directory exists
-            path =os.path.abspath("Documents/TemplateFillerStart/result")
-            # Check whether the specified path exists or not
-            isExist = os.path.exists(path)
-            if not isExist:
-                os.makedirs(path)
-                print("The new directory is created!")
-            doc.save('C:/Users/FHG02/Documents/TemplateFillerStart/result/' + row[headers[0]] + '.docx')        
+
+            doc.save(os.path.join(result_dir, row[headers[0]] + '.docx'))     
 
         label1 = prog.Label(root, text= 'Finished!', fg='green', font=('helvetica', 12, 'bold'))
-        canvas1.create_window(150, 250, window=label1)
+        canvas1.create_window(150, 300, window=label1)
     
 button = prog.Button(text='OpenTemplate', command=BrowseFile, bg='grey',fg='white')
 canvas1.create_window(150, 100, window=button)
 button1 = prog.Button(text='OpenCSV', command=BrowseCSV, bg='grey',fg='white')
 canvas1.create_window(150, 150, window=button1)
-button2 = prog.Button(text='Create', command=CreateTemplate, bg='grey',fg='white')
+button2 = prog.Button(text='Destination', command=BrowseDestinationPath, bg='grey',fg='white')
 canvas1.create_window(150, 200, window=button2)
+button3 = prog.Button(text='Create', command=CreateTemplate, bg='grey',fg='white')
+canvas1.create_window(150, 250, window=button3)
 
 root.mainloop()
 
