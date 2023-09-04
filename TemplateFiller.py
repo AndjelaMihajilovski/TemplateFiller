@@ -6,7 +6,7 @@ from docx import Document
 
 root= prog.Tk()
 root.title("TemplateFiller")
-canvas1 = prog.Canvas(root, width = 300, height = 300)
+canvas1 = prog.Canvas(root, width = 500, height = 500)
 canvas1.pack()
 filename = ""
 csvPath = ""
@@ -22,6 +22,8 @@ def BrowseFile ():
         print("You chose %s" % tempdir)
         filename = tempdir
         print ("\template file name = ", filename)
+        label1 = prog.Label(root, text= filename, fg='green', font=('helvetica', 10, 'bold'))
+        canvas1.create_window(250, 120, window=label1)
 
 def BrowseCSV (): 
     global csvPath 
@@ -33,6 +35,8 @@ def BrowseCSV ():
         print("You chose %s" % tempdir)
         csvPath = tempdir
         print ("\template file name = ", csvPath)
+        label1 = prog.Label(root, text= csvPath, fg='green', font=('helvetica', 10, 'bold'))
+        canvas1.create_window(250, 170, window=label1)
 
 def BrowseDestinationPath (): 
     global path 
@@ -43,9 +47,11 @@ def BrowseDestinationPath ():
         print("You chose %s" % tempdir)
         path = tempdir
         print ("\template file name = ", path)
+        label1 = prog.Label(root, text= path, fg='green', font=('helvetica', 10, 'bold'))
+        canvas1.create_window(250, 220, window=label1)
 
 def CreateTemplate ():
-    global filena 
+    global filename
     global csvPath 
     global path 
     with open(csvPath, newline='') as csvfile:
@@ -67,16 +73,16 @@ def CreateTemplate ():
             doc.save(os.path.join(result_dir, row[headers[0]] + '.docx'))     
 
         label1 = prog.Label(root, text= 'Finished!', fg='green', font=('helvetica', 12, 'bold'))
-        canvas1.create_window(150, 300, window=label1)
+        canvas1.create_window(250, 270, window=label1)
     
 button = prog.Button(text='OpenTemplate', command=BrowseFile, bg='grey',fg='white')
-canvas1.create_window(150, 100, window=button)
+canvas1.create_window(250, 100, window=button)
 button1 = prog.Button(text='OpenCSV', command=BrowseCSV, bg='grey',fg='white')
-canvas1.create_window(150, 150, window=button1)
+canvas1.create_window(250, 150, window=button1)
 button2 = prog.Button(text='Destination', command=BrowseDestinationPath, bg='grey',fg='white')
-canvas1.create_window(150, 200, window=button2)
+canvas1.create_window(250, 200, window=button2)
 button3 = prog.Button(text='Create', command=CreateTemplate, bg='grey',fg='white')
-canvas1.create_window(150, 250, window=button3)
+canvas1.create_window(250, 250, window=button3)
 
 root.mainloop()
 
