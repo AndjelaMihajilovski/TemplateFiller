@@ -12,9 +12,12 @@ filename = ""
 csvPath = ""
 path = ""
 
+
 def BrowseFile (): 
     global filename
     global filenameNotification
+    filenameNotification = prog.Label(root, text= '', fg='green', font=('helvetica', 12, 'bold'))
+    canvas1.create_window(250, 270, window=filenameNotification)
     filenameNotification.config(text='') 
     currdir = os.getcwd()
     filetypes = (("Word files", "*.docx"), ("All files", "*.*"))
@@ -31,6 +34,8 @@ def BrowseCSV ():
     global csvPath 
     currdir = os.getcwd()
     global csvNotification
+    csvNotification = prog.Label(root, text= 'You didn`t choose CSV file!', fg='green', font=('helvetica', 12, 'bold'))
+    canvas1.create_window(250, 290, window=csvNotification)  
     csvNotification.config(text='')
     filetypes = (("CSV files", "*.csv"), ("All files", "*.*"))
     tempdir = fd.askopenfilename(parent=root, initialdir=currdir, title='Please select a CSV file', filetypes=filetypes)
@@ -45,6 +50,8 @@ def BrowseCSV ():
 def BrowseDestinationPath (): 
     global path 
     global pathNotification
+    pathNotification = prog.Label(root, text= '', fg='green', font=('helvetica', 12, 'bold'))
+    canvas1.create_window(250, 310, window=pathNotification) 
     pathNotification.config(text='')
     currdir = os.getcwd()
     tempdir = fd.askdirectory(parent=root, initialdir=currdir, title='Please select a directory')
