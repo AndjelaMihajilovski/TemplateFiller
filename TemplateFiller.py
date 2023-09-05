@@ -11,13 +11,14 @@ canvas1.pack()
 filename = ""
 csvPath = ""
 path = ""
+filenameNotification = prog.Label(root, text= '', fg='red', font=('helvetica', 12, 'bold'))
+csvNotification = prog.Label(root, text= '', fg='red', font=('helvetica', 12, 'bold'))
+pathNotification = prog.Label(root, text= '', fg='red', font=('helvetica', 12, 'bold'))
 
 
 def BrowseFile (): 
     global filename
     global filenameNotification
-    filenameNotification = prog.Label(root, text= '', fg='green', font=('helvetica', 12, 'bold'))
-    canvas1.create_window(250, 270, window=filenameNotification)
     filenameNotification.config(text='') 
     currdir = os.getcwd()
     filetypes = (("Word files", "*.docx"), ("All files", "*.*"))
@@ -34,8 +35,6 @@ def BrowseCSV ():
     global csvPath 
     currdir = os.getcwd()
     global csvNotification
-    csvNotification = prog.Label(root, text= 'You didn`t choose CSV file!', fg='green', font=('helvetica', 12, 'bold'))
-    canvas1.create_window(250, 290, window=csvNotification)  
     csvNotification.config(text='')
     filetypes = (("CSV files", "*.csv"), ("All files", "*.*"))
     tempdir = fd.askopenfilename(parent=root, initialdir=currdir, title='Please select a CSV file', filetypes=filetypes)
@@ -50,8 +49,6 @@ def BrowseCSV ():
 def BrowseDestinationPath (): 
     global path 
     global pathNotification
-    pathNotification = prog.Label(root, text= '', fg='green', font=('helvetica', 12, 'bold'))
-    canvas1.create_window(250, 310, window=pathNotification) 
     pathNotification.config(text='')
     currdir = os.getcwd()
     tempdir = fd.askdirectory(parent=root, initialdir=currdir, title='Please select a directory')
@@ -72,11 +69,11 @@ def CreateTemplate ():
     global pathNotification
 
     if  filename == "":
-        filenameNotification = prog.Label(root, text= 'You didn`t choose Word Template file!', fg='green', font=('helvetica', 12, 'bold'))
+        filenameNotification = prog.Label(root, text= 'You didn`t choose Word Template file!', fg='red', font=('helvetica', 12, 'bold'))
         canvas1.create_window(250, 270, window=filenameNotification)
 
     if  path == "":
-        pathNotification = prog.Label(root, text= 'You didn`t choose save directory!', fg='green', font=('helvetica', 12, 'bold'))
+        pathNotification = prog.Label(root, text= 'You didn`t choose save directory!', fg='red', font=('helvetica', 12, 'bold'))
         canvas1.create_window(250, 310, window=pathNotification)  
 
     if csvPath != "": 
@@ -101,7 +98,7 @@ def CreateTemplate ():
                 label1 = prog.Label(root, text= 'Finished!', fg='green', font=('helvetica', 12, 'bold'))
                 canvas1.create_window(250, 270, window=label1)
     else:
-        csvNotification = prog.Label(root, text= 'You didn`t choose CSV file!', fg='green', font=('helvetica', 12, 'bold'))
+        csvNotification = prog.Label(root, text= 'You didn`t choose CSV file!', fg='red', font=('helvetica', 12, 'bold'))
         canvas1.create_window(250, 290, window=csvNotification)  
     
 button = prog.Button(text='OpenTemplate', command=BrowseFile, bg='grey',fg='white')
