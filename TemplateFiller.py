@@ -69,7 +69,7 @@ def CreateTemplate ():
         canvas1.create_window(250, 270, window=filenameNotification)
 
     if  path == "":
-        pathNotification = prog.Label(root, text= 'Tou didn`t choose save directory!', fg='green', font=('helvetica', 12, 'bold'))
+        pathNotification = prog.Label(root, text= 'You didn`t choose save directory!', fg='green', font=('helvetica', 12, 'bold'))
         canvas1.create_window(250, 310, window=pathNotification)  
 
     if csvPath != "": 
