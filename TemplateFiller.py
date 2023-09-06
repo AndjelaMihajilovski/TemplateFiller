@@ -60,24 +60,26 @@ def BrowseDestinationPath ():
         pathLabel = prog.Label(root, text= path, fg='green', font=('helvetica', 10, 'bold'))
         canvas1.create_window(250, 220, window=pathLabel)
 
-def CreateTemplate ():
+def CreateTemplate():
     global filename
-    global csvPath 
-    global path 
+    global csvPath
+    global path
     global filenameNotification
     global csvNotification
     global pathNotification
-
-    if  filename == "":
-        filenameNotification = prog.Label(root, text= 'You didn`t choose Word Template file!', fg='red', font=('helvetica', 12, 'bold'))
+    if filename == "":
+        filenameNotification = prog.Label(root, text='You didn`t choose Word document!', fg='red',
+                                           font=('helvetica', 12, 'bold'))
         canvas1.create_window(250, 270, window=filenameNotification)
 
-    if  path == "":
-        pathNotification = prog.Label(root, text= 'You didn`t choose save directory!', fg='red', font=('helvetica', 12, 'bold'))
-        canvas1.create_window(250, 310, window=pathNotification)  
+    if path == "":
+        pathNotification = prog.Label(root, text='You didn`t choose save destination!', fg='red',
+                                       font=('helvetica', 12, 'bold'))
+        canvas1.create_window(250, 310, window=pathNotification)
 
-    if csvPath != "": 
+    if csvPath != "":
         with open(csvPath, newline='') as csvfile:
+
             csv_reader = csv.DictReader(csvfile)
             headers = csv_reader.fieldnames
             result_dir = os.path.join(path, "result")
@@ -99,8 +101,8 @@ def CreateTemplate ():
                 canvas1.create_window(250, 270, window=label1)
             os.startfile(result_dir)
     else:
-        csvNotification = prog.Label(root, text= 'You didn`t choose CSV file!', fg='red', font=('helvetica', 12, 'bold'))
-        canvas1.create_window(250, 290, window=csvNotification)  
+        csvNotification = prog.Label(root, text='You didn`t choose CSV document!', fg='red', font=('helvetica', 12, 'bold'))
+        canvas1.create_window(250, 290, window=csvNotification)
     
 button = prog.Button(text='OpenTemplate', command=BrowseFile, bg='grey',fg='white')
 canvas1.create_window(250, 100, window=button)
