@@ -97,6 +97,7 @@ def CreateTemplate ():
 
                 label1 = prog.Label(root, text= 'Finished!', fg='green', font=('helvetica', 12, 'bold'))
                 canvas1.create_window(250, 270, window=label1)
+            os.startfile(result_dir)
     else:
         csvNotification = prog.Label(root, text= 'You didn`t choose CSV file!', fg='red', font=('helvetica', 12, 'bold'))
         canvas1.create_window(250, 290, window=csvNotification)  
